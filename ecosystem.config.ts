@@ -14,7 +14,7 @@ const apps: PM2App[] = [
     name: "admin-app",
     script: "npm",
     args: "start",
-    cwd: resolve(__dirname, "./admin"),
+    cwd: resolve(__dirname, "."),
     env: {
       NODE_ENV: "production",
       PORT: "3001"
