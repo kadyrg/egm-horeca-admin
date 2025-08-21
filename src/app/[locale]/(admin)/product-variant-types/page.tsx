@@ -8,12 +8,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ProductVariantTypeAdd } from "@/components/shared/product-variant-type-add";
-import { getProductVariantTypesAdmin } from "@/lib/api/product-variant-types";
+import { getProductVariantTypes } from "@/lib/api/product-variant-types";
 import { ProductVariantTypeDelete } from "@/components/shared/poduct-variant-type-delete";
 import { ProductVariantTypeEdit } from "@/components/shared/product-variant-type-edit";
 
 export default async function ProductVariantTypesPage() {
-  const productVariantTypes = await getProductVariantTypesAdmin();
+  const productVariantTypes = await getProductVariantTypes();
 
   return (
     <List
