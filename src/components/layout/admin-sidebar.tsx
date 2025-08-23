@@ -1,4 +1,13 @@
-import { Box, ChevronUp, Home, Images, LetterText, User2, UsersRound } from "lucide-react";
+import {
+  AlignJustify,
+  Box,
+  ChevronUp,
+  Home,
+  Images,
+  LetterText,
+  User2,
+  UsersRound,
+} from "lucide-react";
 
 import { CategoriesIcon } from "../ui/icons";
 import { Link } from "@/i18n/navigation";
@@ -16,12 +25,17 @@ import {
   SidebarMenuSubItem,
   SidebarTrigger,
 } from "../ui/sidebar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 const items = [
   {
     title: "Home",
-    url: "/admin",
+    url: "/",
     icon: Home,
   },
   {
@@ -35,11 +49,6 @@ const items = [
     icon: Images,
   },
   {
-    title: "Metadata",
-    url: "/metadata",
-    icon: LetterText,
-  },
-  {
     title: "Categories",
     url: "/categories",
     icon: CategoriesIcon,
@@ -50,24 +59,29 @@ const items = [
     url: "/products",
     items: [
       {
+        title: "Product Instances",
+        url: "/product-instances",
+      },
+      {
         title: "Products",
         url: "/products",
       },
-      {
-        title: "Variant types",
-        url: "/product-variant-types",
-      },
     ],
+  },
+  {
+    title: "Variant groups",
+    icon: AlignJustify,
+    url: "/variant-groups",
   },
 ];
 
 const metadata = [
-  {title: "Root layout", url: '/metadata/root_layout'},
-  {title: "Home page", url: '/metadata/home_page'},
-  {title: "Product page", url: '/metadata/product_page'},
-  {title: "Login page", url: '/metadata/login_page'},
-  {title: "Register page", url: '/metadata/register_page'},
-]
+  { title: "Root layout", url: "/metadata/root_layout" },
+  { title: "Home page", url: "/metadata/home_page" },
+  { title: "Product page", url: "/metadata/product_page" },
+  { title: "Login page", url: "/metadata/login_page" },
+  { title: "Register page", url: "/metadata/register_page" },
+];
 
 function AdminSidebar() {
   return (
@@ -106,31 +120,31 @@ function AdminSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton>
-                    <User2 /> Metadata
-                    <ChevronUp className="ml-auto" />
-                  </SidebarMenuButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  side="top"
-                  className="w-[--radix-popper-anchor-width]"
-                >
-                  {metadata.map((item) => (
-                    <Link key={item.title} href={item.url}>
-                      <DropdownMenuItem>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton>
+                  <User2 /> Metadata
+                  <ChevronUp className="ml-auto" />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                side="top"
+                className="w-[--radix-popper-anchor-width]"
+              >
+                {metadata.map((item) => (
+                  <Link key={item.title} href={item.url}>
+                    <DropdownMenuItem>
                       <span>{item.title}</span>
                     </DropdownMenuItem>
-                    </Link>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarFooter>
+                  </Link>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }

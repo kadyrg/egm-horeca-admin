@@ -9,21 +9,17 @@ import { useState } from "react";
 
 function Delete({
   onDelete,
-  successMessage,
-  failMessage,
 }: {
   onDelete: () => Promise<void> | void;
-  successMessage: string;
-  failMessage: string;
 }) {
   const [open, setOpen] = useState<boolean>(false);
 
   async function handleClick() {
     try {
       await onDelete();
-      toast(<GoodToast text={successMessage} />, { position: "top-center" });
+      toast(<GoodToast text={"Successfully deleted"} />, { position: "top-center" });
     } catch {
-      toast(<BadToast text={failMessage} />, { position: "top-center" });
+      toast(<BadToast text={"Something went wrong"} />, { position: "top-center" });
     }
   }
 
@@ -42,18 +38,18 @@ function Delete({
       }
       title={"Are you sure you want to delete?"}
       body={
-        <div className="flex gap-2 w-full mx-auto py-3 px-5">
+        <div className="flex gap-2 w-full">
           <Button
             onClick={() => setOpen(false)}
             variant={"outline"}
-            className="w-1/2"
+            className="flex-1"
           >
             Cancel
           </Button>
           <Button
             onClick={handleClick}
             variant={"destructive"}
-            className="w-1/2"
+            className="flex-1"
           >
             Delete
           </Button>

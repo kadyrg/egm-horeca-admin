@@ -1,46 +1,53 @@
 "use client";
 
-import { DialogDrawer } from "./dialog-drawer";
+import { DialogDrawer } from "../dialog-drawer";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
-import { BadToast, GoodToast } from "./toasts";
+import { BadToast, GoodToast } from "../toasts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { toast } from "sonner";
-import { ScrollArea } from "../ui/scroll-area";
-import { Input } from "../ui/input";
+import { ScrollArea } from "../../ui/scroll-area";
+import { Input } from "../../ui/input";
 import { addProductVariant } from "@/app/actions/product-variants";
-import { ProductVariantTypeSelect } from "./product-variant-type-select";
+import { ProductVariantTypeSelect } from "../product-variant-types/product-variant-type-select";
 import { ProductVariantTypesListView } from "@/lib/types/product-variant-types";
-import { FormLabel,  Form,
+import {
+  FormLabel,
+  Form,
   FormControl,
   FormField,
   FormItem,
-  FormMessage, } from "../ui/form";
+  FormMessage,
+} from "../../ui/form";
 const formSchema = z.object({
   nameEn: z.string().min(1).max(50),
   nameRo: z.string().min(1).max(50),
   price: z.number(),
   stock: z.number(),
-  productVariantTypeId: z.number().min(1)
+  productVariantTypeId: z.number().min(1),
 });
-function ProductVariantsAdd({productId, productVariantTypesAll}: {productId: number; productVariantTypesAll: ProductVariantTypesListView[]}) {
+function ProductVariantsAdd({
+  productId,
+  productVariantTypesAll,
+}: {
+  productId: number;
+  productVariantTypesAll: ProductVariantTypesListView[];
+}) {
   const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        nameEn: "",
-        nameRo: "",
-        price: undefined,
-        stock: undefined
-      },
-    });
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-    const body = JSON.stringify(
-      {...values, productId}
-    );
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      nameEn: "",
+      nameRo: "",
+      price: undefined,
+      stock: undefined,
+    },
+  });
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const body = JSON.stringify({ ...values, productId });
     try {
       await addProductVariant(body);
       toast(<GoodToast text={"Product variant added successfully"} />, {

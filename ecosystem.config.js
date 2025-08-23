@@ -9,9 +9,9 @@ module.exports = {
       cwd: resolve(__dirname, "."),
       env: {
         NODE_ENV: "production",
-        PORT: "3001"
+        PORT: "3001",
       },
-      watch: false
-    }
-  ]
+      watch: false,
+    },
+  ],
 };

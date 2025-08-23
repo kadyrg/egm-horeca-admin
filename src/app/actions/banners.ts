@@ -19,12 +19,9 @@ export async function addBanner(formData: FormData) {
 
 export async function deleteBanner(id: number) {
   try {
-    const response = await fetch(
-      `${process.env.API_URL}/banners/${id}`,
-      {
-        method: "DELETE",
-      },
-    );
+    const response = await fetch(`${process.env.API_URL}/banners/${id}`, {
+      method: "DELETE",
+    });
     if (!response.ok) {
       throw new Error();
     }
@@ -36,13 +33,10 @@ export async function deleteBanner(id: number) {
 
 export async function updateBanner(id: number, formData: FormData) {
   try {
-    const response = await fetch(
-      `${process.env.API_URL}/banners/${id}`,
-      {
-        method: "PATCH",
-        body: formData,
-      },
-    );
+    const response = await fetch(`${process.env.API_URL}/banners/${id}`, {
+      method: "PATCH",
+      body: formData,
+    });
     if (!response.ok) {
       throw new Error();
     }

@@ -1,7 +1,7 @@
 "use client";
 
-import { DialogDrawer } from "./dialog-drawer";
-import { EditButton } from "./edit-button";
+import { DialogDrawer } from "../dialog-drawer";
+import { EditButton } from "../edit-button";
 import { CategoryListView } from "@/lib/types/categories";
 import { useState } from "react";
 import { z } from "zod";
@@ -9,16 +9,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { updateCategory } from "@/app/actions/categories";
 import { toast } from "sonner";
-import { BadToast, GoodToast } from "./toasts";
+import { BadToast, GoodToast } from "../toasts";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+} from "../../ui/form";
+import { Input } from "../../ui/input";
+import { CancelButton } from "../cancel-button";
+import { SaveButton } from "@/components/save-button";
 
 const formSchema = z.object({
   nameEn: z.string().min(1).max(50),
@@ -119,17 +120,8 @@ function CategoryEdit({ data }: { data: CategoryListView }) {
               )}
             />
             <div className="flex gap-1 justify-end">
-              <Button
-                type="button"
-                onClick={() => setOpen(false)}
-                size={"sm"}
-                variant={"destructive"}
-              >
-                Cancel
-              </Button>
-              <Button size="sm" type="submit">
-                Save changes
-              </Button>
+              <CancelButton onClick={() => setOpen(false)} />
+              <SaveButton />
             </div>
           </form>
         </Form>

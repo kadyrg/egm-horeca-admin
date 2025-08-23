@@ -1,7 +1,7 @@
 "use client";
 
-import { DialogDrawer } from "./dialog-drawer";
-import { EditButton } from "./edit-button";
+import { DialogDrawer } from "../dialog-drawer";
+import { EditButton } from "../edit-button";
 import { ProductsListView } from "@/lib/types/products";
 import { CategoryListViewAll } from "@/lib/types/categories";
 import { useState } from "react";
@@ -14,18 +14,18 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "../ui/form";
+} from "../../ui/form";
 import { toast } from "sonner";
-import { BadToast, GoodToast } from "./toasts";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { ScrollArea } from "../ui/scroll-area";
+import { BadToast, GoodToast } from "../toasts";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
+import { ScrollArea } from "../../ui/scroll-area";
 import { editProduct } from "@/app/actions/products";
-import { FormLabel } from "../ui/form";
-import { Switch } from "../ui/switch";
-import { Textarea } from "../ui/textarea";
-import { CategorySelect } from "./category-select";
-import { ImageDropzone } from "./main-image-dropzone";
+import { FormLabel } from "../../ui/form";
+import { Switch } from "../../ui/switch";
+import { Textarea } from "../../ui/textarea";
+import { CategorySelect } from "../category-select";
+import { ImageDropzone } from "../main-image-dropzone";
 
 const formSchema = z.object({
   nameEn: z.string().min(1).max(50),

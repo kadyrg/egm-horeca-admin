@@ -16,9 +16,10 @@ import {
   FormMessage,
 } from "../../ui/form";
 import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
 import { BannerListView } from "@/lib/types/banners";
 import { updateBanner } from "@/app/actions/banners";
+import { SaveButton } from "@/components/save-button";
+import { CancelButton } from "../cancel-button";
 
 const formSchema = z.object({
   image: z.instanceof(File).optional(),
@@ -84,17 +85,8 @@ function BannerEdit({ data }: { data: BannerListView }) {
               )}
             />
             <div className="flex gap-1 justify-end">
-              <Button
-                type="button"
-                onClick={() => setOpen(false)}
-                size={"sm"}
-                variant={"destructive"}
-              >
-                Cancel
-              </Button>
-              <Button size="sm" type="submit">
-                Save changes
-              </Button>
+              <CancelButton onClick={() => setOpen(false)} />
+              <SaveButton />
             </div>
           </form>
         </Form>

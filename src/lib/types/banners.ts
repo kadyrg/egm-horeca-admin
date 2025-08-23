@@ -1,7 +1,7 @@
 export type BannerListView = {
-  id: number
-  image: string
-}
+  id: number;
+  image: string;
+};
 
 export type BannersList = {
   data: BannerListView[];
@@ -10,4 +10,4 @@ export type BannersList = {
   last: number;
   totalPages: number;
   page: number;
-}
+};

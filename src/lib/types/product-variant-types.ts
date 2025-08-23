@@ -2,6 +2,7 @@ export type ProductVariantTypesListView = {
   id: number;
   nameEn: string;
   nameRo: string;
+  variantsCount: number
 };
 
 export type ProductVariantTypesList = {

@@ -15,7 +15,7 @@ interface Props {
   searchParams: Promise<{ page?: string }>;
 }
 
-export default async function ProductsPage({searchParams}:Props) {
+export default async function ProductsPage({ searchParams }: Props) {
   const { page } = await searchParams;
   const users = await getUsers();
 

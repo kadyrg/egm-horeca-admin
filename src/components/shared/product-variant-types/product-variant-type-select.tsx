@@ -1,8 +1,10 @@
-
-import { Select ,SelectContent,
+import {
+  Select,
+  SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,} from "../ui/select";
+  SelectValue,
+} from "../../ui/select";
 import { ProductVariantTypesListView } from "@/lib/types/product-variant-types";
 
 function ProductVariantTypeSelect({

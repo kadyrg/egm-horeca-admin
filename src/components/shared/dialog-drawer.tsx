@@ -15,6 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import { ScrollArea } from "../ui/scroll-area";
 
 type DialogDrawerProps = {
   title: string;
@@ -52,7 +53,11 @@ function DialogDrawer({
         <DialogHeader className="px-5 py-5 shadow-xs shrink-0">
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        {body}
+        <div className="flex-1 min-h-0">
+          <ScrollArea className="h-full p-5">
+            {body}
+          </ScrollArea>
+        </div>
       </DialogContent>
     </Dialog>
   );

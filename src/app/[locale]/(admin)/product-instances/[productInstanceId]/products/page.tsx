@@ -1,7 +1,8 @@
 import { List } from "@/components/shared/list";
-import { ProductAdd } from "@/components/shared/product-add";
-import { getAllCategories } from "@/lib/api/categories";
-import { getProducts } from "@/lib/api/products";
+import { ProductInstanceAddProduct } from "@/components/shared/product-instances/product-instance-add-product";
+import { ProductDelete } from "@/components/shared/products/product-delete";
+import { ProductEdit } from "@/components/shared/products/product-edit";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -10,30 +11,35 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { ProductEdit } from "@/components/shared/product-edit";
-import { ProductDelete } from "@/components/shared/product-delete";
-import { Link } from "@/i18n/navigation";
+import { getAllCategories } from "@/lib/api/categories";
+import { getProductsOfInstanceId } from "@/lib/api/product-instances";
+import { getProductVariantTypesAll } from "@/lib/api/product-variant-types";
+import { getProductVariantsAll } from "@/lib/api/product-variants";
 
 interface Props {
-  searchParams: Promise<{ page?: string }>;
+  params: Promise<{ productInstanceId: number }>;
 }
 
-export default async function ProductsPage({searchParams}: Props) {
-  const { page } = await searchParams;
-  const products = await getProducts();
+export default async function ProductVariantsPage({ params }: Props) {
+  const {productInstanceId} = await params
+  const products = await getProductsOfInstanceId(productInstanceId);
   const categories = await getAllCategories();
+  const varaintTypes = await getProductVariantTypesAll()
+  const variants = await getProductVariantsAll()
 
   return (
     <List
-      addFeature={<ProductAdd categories={categories} />}
-      title={"Products"}
+      addFeature={
+        <ProductInstanceAddProduct
+          instanceId={productInstanceId}
+          categories={categories} variantTypes={varaintTypes} variants={variants}
+        />
+      }
       total={products.total}
       initial={products.initial}
       last={products.last}
       totalPages={products.totalPages}
       page={products.page}
-      searchPlaceholder={"Search product..."}
       table={
         <Table>
           <TableHeader>
@@ -44,7 +50,8 @@ export default async function ProductsPage({searchParams}: Props) {
               <TableHead>price</TableHead>
               <TableHead>stock</TableHead>
               <TableHead>status</TableHead>
-              <TableHead>Variants count</TableHead>
+              <TableHead>Variant type</TableHead>
+              <TableHead>Variant name</TableHead>
               <TableHead className="text-right">Controls</TableHead>
             </TableRow>
           </TableHeader>
@@ -61,10 +68,8 @@ export default async function ProductsPage({searchParams}: Props) {
                     {item.status ? "active" : "inactive"}
                   </Badge>
                 </TableCell>
-                <TableCell>
-                  <Link href={`/admin/products/${item.id}/variants`}>
-                  <Badge variant={"outline"}>{item.variantsCount} variants</Badge></Link>
-                </TableCell>
+                <TableCell>{item.categoryId}</TableCell>
+                <TableCell>{item.categoryId}</TableCell>
                 <TableCell className="text-right">
                   <span className="flex gap-1 float-right">
                     <ProductEdit product={item} allCategories={categories} />

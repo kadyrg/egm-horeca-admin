@@ -1,6 +1,4 @@
-import {
-  ProductsList
-} from "../types/products";
+import { ProductsList } from "../types/products";
 
 export async function getProducts() {
   const res = await fetch(`${process.env.API_URL}/products`, {

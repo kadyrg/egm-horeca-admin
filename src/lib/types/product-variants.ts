@@ -2,8 +2,6 @@ export type ProductVariantsListView = {
   id: number;
   nameEn: string;
   nameRo: string;
-  price: number;
-  stock: number;
   productVariantTypeId: number;
 };
 

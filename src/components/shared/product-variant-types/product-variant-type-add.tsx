@@ -1,6 +1,6 @@
 "use client";
 
-import { DialogDrawer } from "./dialog-drawer";
+import { DialogDrawer } from "../dialog-drawer";
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -11,13 +11,14 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "../ui/form";
+} from "../../ui/form";
 import { toast } from "sonner";
-import { ScrollArea } from "../ui/scroll-area";
-import { Input } from "../ui/input";
-import { BadToast, GoodToast } from "./toasts";
+import { ScrollArea } from "../../ui/scroll-area";
+import { Input } from "../../ui/input";
+import { BadToast, GoodToast } from "../toasts";
 import { addProductVariantType } from "@/app/actions/product-variant-types";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
+import { AddButton } from "../add-button";
 
 const formSchema = z.object({
   nameEn: z.string().min(1).max(50),
@@ -53,9 +54,9 @@ function ProductVariantTypeAdd() {
   return (
     <DialogDrawer
       isOpen={open}
-      title={"Add Product"}
+      title={"Add Variant Group"}
       onOpenChange={(open) => setOpen(open)}
-      trigger={<Button size={"sm"}>Add Product Variant Type</Button>}
+      trigger={<AddButton />}
       body={
         <Form {...form}>
           <form

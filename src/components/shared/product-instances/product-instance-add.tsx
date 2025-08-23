@@ -5,53 +5,46 @@ import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../../ui/form";
+import { Form } from "../../ui/form";
+import { addCategory } from "@/app/actions/categories";
 import { toast } from "sonner";
 import { BadToast, GoodToast } from "../toasts";
-import { Input } from "../../ui/input";
-import { addBanner } from "@/app/actions/banners";
 import { AddButton } from "../add-button";
 import { CancelButton } from "../cancel-button";
 import { SaveButton } from "@/components/save-button";
+import { addProductInstance } from "@/app/actions/product-instances";
 
 const formSchema = z.object({
-  image: z.instanceof(File),
+
 });
 
-function BannerAdd() {
+function ProductInstanceAdd() {
   const [open, setOpen] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      image: undefined,
+
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const formData = new FormData();
-    formData.append("image", values.image);
     try {
-      await addBanner(formData);
-      toast(<GoodToast text={"Banner added successfully"} />, {
+      await addProductInstance();
+      toast(<GoodToast text={"Product instance added successfully"} />, {
         position: "top-center",
       });
       setOpen(false);
     } catch {
-      toast(<BadToast text={"Banner couldn't be added"} />, {
+      toast(<BadToast text={"Product instance couldn't be added"} />, {
         position: "top-center",
       });
     }
   }
+
   return (
     <DialogDrawer
-      title={"Add Banner"}
+      title={"Add Product instance"}
       isOpen={open}
       onOpenChange={(open) => setOpen(open)}
       trigger={<AddButton />}
@@ -59,27 +52,8 @@ function BannerAdd() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-3 p-3"
+            className="space-y-4"
           >
-            <FormField
-              control={form.control}
-              name="image"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0] ?? null;
-                        field.onChange(file);
-                      }}
-                      onBlur={field.onBlur}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <div className="flex gap-1 justify-end">
               <CancelButton onClick={() => setOpen(false)} />
               <SaveButton />
@@ -88,7 +62,7 @@ function BannerAdd() {
         </Form>
       }
     />
-  );
+  )
 }
 
-export { BannerAdd };
+export { ProductInstanceAdd }

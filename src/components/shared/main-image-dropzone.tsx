@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Dropzone,
-  DropzoneContent,
-  DropzoneEmptyState,
-} from "../ui/dropzone";
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from "../ui/dropzone";
 import { UploadIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 

@@ -1,10 +1,16 @@
-import { ProductVariantsListAdmin } from "../types/product-variants";
+import {ProductVariantsListView } from "../types/product-variants";
 
-export async function getProductVariantsByProductId(productId: number) {
-  const res = await fetch(`${process.env.API_URL}/products/${productId}/variants`, {
-    method: "GET",
-    next: { tags: ["product-variants"] },
-  });
-  const data: ProductVariantsListAdmin = await res.json();
+
+
+
+export async function getProductVariantsAll() {
+  const res = await fetch(
+    `${process.env.API_URL}/product_variants/all`,
+    {
+      method: "GET",
+      next: { tags: ["product-variants"] },
+    },
+  );
+  const data: ProductVariantsListView[] = await res.json();
   return data;
 }
