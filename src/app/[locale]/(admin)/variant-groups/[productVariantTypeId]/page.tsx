@@ -7,10 +7,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ProductVariantTypeAdd } from "@/components/shared/product-variant-types/product-variant-type-add";
-import { Badge } from "@/components/ui/badge";
 import { getProductVariantsByType } from "@/lib/api/product-variant-types";
 import { ProductVariantTypeDelete } from "@/components/shared/product-variant-types/product-variant-type-delete";
+import { ProductVariantAdd } from "@/components/shared/product-variants/product-variant-add";
 
 interface Props {
   params: Promise<{productVariantTypeId: number}>
@@ -22,7 +21,7 @@ export default async function ProductVariantsPage({params}: Props) {
 
   return (
     <List
-      addFeature={<ProductVariantTypeAdd />}
+      addFeature={<ProductVariantAdd productVariantTypeId={productVariantTypeId} />}
       total={productVariants.total}
       initial={productVariants.initial}
       last={productVariants.last}
@@ -35,7 +34,6 @@ export default async function ProductVariantsPage({params}: Props) {
               <TableHead className="w-[100px]">ID</TableHead>
               <TableHead>English name</TableHead>
               <TableHead>Romanian name</TableHead>
-              <TableHead>Variants</TableHead>
               <TableHead className="text-right">Controls</TableHead>
             </TableRow>
           </TableHeader>
@@ -45,11 +43,6 @@ export default async function ProductVariantsPage({params}: Props) {
                 <TableCell className="font-medium">{item.id}</TableCell>
                 <TableCell>{item.nameEn}</TableCell>
                 <TableCell>{item.nameRo}</TableCell>
-                <TableCell>
-                  <Badge variant={"outline"}>
-                    {/* {item.variantsCount} variants */}
-                  </Badge>
-                </TableCell>
                 <TableCell className="text-right">
                   <span className="flex gap-1 float-right">
                     {/* <ProductVariantEdit productVariantType={item}  /> */}

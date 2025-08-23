@@ -24,7 +24,7 @@ export async function getProductVariantTypesAll() {
 
 export async function getProductVariantsByType(variantTypeId: number) {
   const res = await fetch(
-    `${process.env.API_URL}/product_variant-types/${variantTypeId}/variants`,
+    `${process.env.API_URL}/product_variant_types/${variantTypeId}/variants`,
     {
       method: "GET",
       next: { tags: ["product-variants"] },

@@ -43,7 +43,7 @@ export default async function ProductVariantTypesPage() {
                 <TableCell>{item.nameEn}</TableCell>
                 <TableCell>{item.nameRo}</TableCell>
                 <TableCell>
-                  <Link href={`/product-variant-types/${item.id}`}>
+                  <Link href={`/variant-groups/${item.id}`}>
                   <Badge variant={"outline"}>
                     {item.variantsCount} variants
                   </Badge></Link>
