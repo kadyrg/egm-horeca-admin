@@ -8,29 +8,26 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ProductVariantTypeAdd } from "@/components/shared/product-variant-types/product-variant-type-add";
-import { ProductVariantTypeDelete } from "@/components/shared/poduct-variant-type-delete";
-import { ProductVariantTypeEdit } from "@/components/shared/product-variant-types/product-variant-type-edit";
 import { Badge } from "@/components/ui/badge";
 import { getProductVariantsByType } from "@/lib/api/product-variant-types";
+import { ProductVariantTypeDelete } from "@/components/shared/product-variant-types/product-variant-type-delete";
 
 interface Props {
   params: Promise<{productVariantTypeId: number}>
 }
 
-export default async function ProductVariantTypesPage({params}: Props) {
+export default async function ProductVariantsPage({params}: Props) {
   const {productVariantTypeId} = await params
   const productVariants = await getProductVariantsByType(productVariantTypeId);
 
   return (
     <List
       addFeature={<ProductVariantTypeAdd />}
-      title={"Variants"}
       total={productVariants.total}
       initial={productVariants.initial}
       last={productVariants.last}
       totalPages={productVariants.totalPages}
       page={productVariants.page}
-      searchPlaceholder={"Search product variant..."}
       table={
         <Table>
           <TableHeader>
@@ -50,12 +47,12 @@ export default async function ProductVariantTypesPage({params}: Props) {
                 <TableCell>{item.nameRo}</TableCell>
                 <TableCell>
                   <Badge variant={"outline"}>
-                    {item.variantsCount} variants
+                    {/* {item.variantsCount} variants */}
                   </Badge>
                 </TableCell>
                 <TableCell className="text-right">
                   <span className="flex gap-1 float-right">
-                    <ProductVariantTypeEdit productVariantType={item} />
+                    {/* <ProductVariantEdit productVariantType={item}  /> */}
                     <ProductVariantTypeDelete id={item.id} />
                   </span>
                 </TableCell>

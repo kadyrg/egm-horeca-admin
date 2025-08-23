@@ -21,13 +21,11 @@ export default async function ProductsPage({ searchParams }: Props) {
 
   return (
     <List
-      title={"Users"}
       total={users.total}
       initial={users.initial}
       last={users.last}
       totalPages={users.totalPages}
       page={users.page}
-      searchPlaceholder={"Search user..."}
       table={
         <Table>
           <TableHeader>
